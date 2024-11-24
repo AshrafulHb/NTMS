@@ -16,6 +16,7 @@ namespace NTMS.BLL.Services
         private readonly IGenericRepository<Ereading> _ereadingRepository;
         private readonly IGenericRepository<EbillingRule> _ruleRepository;
         private readonly IGenericRepository<UtilityOption> _utilityRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IMapper _mapper;
 
         public ReportService(
@@ -25,6 +26,7 @@ namespace NTMS.BLL.Services
             IGenericRepository<Emeter> meterRepository,
             IGenericRepository<EbillingRule> ebillingRuleRepository,
             IGenericRepository<UtilityOption> utilityRepository,
+            IReportRepository reportRepository,
             IMapper mapper)
         {
             _tenantRepository = tenantRepository;
@@ -33,7 +35,25 @@ namespace NTMS.BLL.Services
             _meterRepository = meterRepository;
             _ruleRepository = ebillingRuleRepository;
             _utilityRepository = utilityRepository;
+            _reportRepository = reportRepository ?? throw new ArgumentNullException(nameof(reportRepository));
             _mapper = mapper;
+        }
+
+        public async Task<ReportDTO> GetByTenantIdAndDateRange(int tenantId, string firstDate, string lastDate)
+        {
+            try
+            {
+                var startDate = DateTime.ParseExact(firstDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var endDate = DateTime.ParseExact(lastDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                var report = await _reportRepository.GetByTenantIdAndDateRangeAsync(tenantId, startDate, endDate);
+
+                return _mapper.Map<ReportDTO>(report);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private async Task<decimal> CalculateElectricityCharge(int consumedUnits, EbillingRule ebr, bool isShop)
