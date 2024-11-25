@@ -23,7 +23,8 @@ namespace NTMS.API.Controllers
             try
             {
                 rsp.status = true;
-                rsp.value = await _reportService.Report(tenantId, firstDate, lastDate);
+                rsp.value = await _reportService.GetByTenantIdAndDateRange(tenantId, firstDate, lastDate);
+                //rsp.value = await _reportService.Report(tenantId, firstDate, lastDate);
             }
             catch (Exception ex)
             {

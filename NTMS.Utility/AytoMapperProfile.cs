@@ -44,6 +44,13 @@ namespace NTMS.Utility
           .ForMember(dest => dest.EndDate, opt => opt.MapFrom(origin => Convert.ToDateTime(origin.EndDate)));
 
             #endregion Ereading
+
+            #region Report
+            CreateMap<Report, ReportDTO>()
+                .ForAllMembers(o => o.Condition((src, dest, ValueTask) => ValueTask != null));
+            CreateMap<ReportDTO, Report>()
+                .ForAllMembers(o => o.Condition((src, dest, ValueTask) => ValueTask != null));
+            #endregion Report
         }
 
     }

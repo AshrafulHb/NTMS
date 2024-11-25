@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NTMS.BLL.Services;
 using NTMS.BLL.Services.Abstract;
+using NTMS.DAL.DBContext;
 using NTMS.DAL.Repository;
 using NTMS.DAL.Repository.Abstract;
 using NTMS.Model;
@@ -26,6 +27,7 @@ namespace NTMS.IOC
             services.AddScoped<IEmeterService, EmeterService>();
             services.AddScoped<IEreadingService, EreadingService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
         }
     }
