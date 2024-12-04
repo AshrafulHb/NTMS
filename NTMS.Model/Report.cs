@@ -1,8 +1,7 @@
-﻿namespace NTMS.DTO
+﻿namespace NTMS.Model
 {
-    public class ReportDTO
+    public class Report
     {
-
         public string? TenantName { get; set; }
         public string? FlatCode { get; set; }
 
@@ -26,7 +25,6 @@
 
         public string? MeterRent { get; set; }
 
-        //       public string? MinimumCharge { get; set; }
 
         public string? PrincipalAmount { get; set; }
 
@@ -52,7 +50,6 @@
         public string? TotalWaterBill { get; set; }
 
         public string? Total { get; set; }
-
 
     }
 }

@@ -4,7 +4,7 @@ using NTMS.Model;
 
 namespace NTMS.DAL.DBContext;
 
-public partial class NtmsContext : DbContext
+public class NtmsContext : DbContext
 {
     public NtmsContext()
     {

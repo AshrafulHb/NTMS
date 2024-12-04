@@ -7,23 +7,23 @@ namespace NTMS.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TenantController : ControllerBase
+    public class WmeterController : ControllerBase
     {
-        private readonly ITenantService _tenantService;
+        private readonly IWmeterService _wmeterService;
 
-        public TenantController(ITenantService tenantService)
+        public WmeterController(IWmeterService wmeterService)
         {
-            _tenantService = tenantService;
+            _wmeterService = wmeterService;
         }
         [HttpGet, Route("List")]
         public async Task<IActionResult> List()
         {
-            var rsp = new Response<List<TenantDTO>>();
+            var rsp = new Response<List<WmeterDTO>>();
 
             try
             {
                 rsp.status = true;
-                rsp.value = await _tenantService.List();
+                rsp.value = await _wmeterService.List();
             }
             catch (Exception ex)
             {
@@ -33,29 +33,46 @@ namespace NTMS.API.Controllers
             return Ok(rsp);
         }
 
-        [HttpPost, Route("Create")]
-        public async Task<IActionResult> Create([FromBody] TenantDTO tenant)
+        [HttpGet, Route("Get/{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var rsp = new Response<TenantDTO>();
+            var rsp = new Response<WmeterDTO>();
 
             try
             {
                 rsp.status = true;
-                rsp.value = await _tenantService.Create(tenant);
+                rsp.value = await _wmeterService.Get(id);
+            }
+            catch (Exception ex)
+            {
+                rsp.status = false;
+                rsp.msg = ex.Message;
+            }
+            return Ok(rsp);
+        }
+        [HttpPost, Route("Create")]
+        public async Task<IActionResult> Create([FromBody] WmeterDTO meter)
+        {
+            var rsp = new Response<WmeterDTO>();
+
+            try
+            {
+                rsp.status = true;
+                rsp.value = await _wmeterService.Create(meter);
             }
             catch (Exception ex) { rsp.status = false; rsp.msg = ex.Message; }
             return Ok(rsp);
         }
 
         [HttpPut, Route("Edit")]
-        public async Task<IActionResult> Edit([FromBody] TenantDTO tenant)
+        public async Task<IActionResult> Edit([FromBody] WmeterDTO meter)
         {
             var rsp = new Response<bool>();
 
             try
             {
                 rsp.status = true;
-                rsp.value = await _tenantService.Edit(tenant);
+                rsp.value = await _wmeterService.Edit(meter);
             }
             catch (Exception ex) { rsp.status = false; rsp.msg = ex.Message; }
             return Ok(rsp);
@@ -69,7 +86,7 @@ namespace NTMS.API.Controllers
             try
             {
                 rsp.status = true;
-                rsp.value = await _tenantService.Delete(id);
+                rsp.value = await _wmeterService.Delete(id);
             }
             catch (Exception ex) { rsp.status = false; rsp.msg = ex.Message; }
             return Ok(rsp);

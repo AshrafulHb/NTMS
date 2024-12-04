@@ -4,7 +4,6 @@ using NTMS.BLL.Services.Abstract;
 using NTMS.DAL.Repository.Abstract;
 using NTMS.DTO;
 using NTMS.Model;
-using System.Diagnostics.Metrics;
 
 namespace NTMS.BLL.Services
 {
@@ -23,16 +22,16 @@ namespace NTMS.BLL.Services
             try
             {
                 var query = await _emeterRepository.GetAll();
-                //   var meterList= query.Include(m=>m.Ereadings).ToList();
-                var meterList = query.Include(m => m.Flat).Where(m=>m.IsActive==true);
-
-                return _mapper.Map<List<EmeterDTO>>(meterList);
+                var meterList = query.Include(m => m.Ereadings).Include(m => m.Flat).ToList();
+                //      var meterList = query.Include(m => m.Flat).Where(m=>m.IsActive==true);
+                var list = _mapper.Map<List<EmeterDTO>>(meterList);
+                return list;
             }
             catch { throw; }
         }
-       public async Task<EmeterDTO> Get(int id)
+        public async Task<EmeterDTO> Get(int id)
         {
-          
+
             try
             {
 
@@ -42,7 +41,7 @@ namespace NTMS.BLL.Services
             }
             catch { throw; }
         }
-        
+
 
 
         public async Task<EmeterDTO> Create(EmeterDTO model)
@@ -53,7 +52,7 @@ namespace NTMS.BLL.Services
                 if (meter.Id == 0) throw new TaskCanceledException("Failed to add new meter");
 
                 var query = await _emeterRepository.GetAll(m => m.Id == meter.Id);
-      //          meter = query.Include(m => m.Ereadings).First();
+                //          meter = query.Include(m => m.Ereadings).First();
 
                 return _mapper.Map<EmeterDTO>(query);
             }
@@ -70,7 +69,7 @@ namespace NTMS.BLL.Services
                 var meter = await _emeterRepository.Get(m => m.Id == meterModel.Id);
                 if (meter == null) throw new TaskCanceledException("Meter not exists");
 
-               meter.MeterNumber = meterModel.MeterNumber;
+                meter.MeterNumber = meterModel.MeterNumber;
                 meter.FlatId = meterModel.FlatId;
                 meter.IsActive = meterModel.IsActive;
 
@@ -85,7 +84,7 @@ namespace NTMS.BLL.Services
         {
             try
             {
-                var meter = await _emeterRepository.Get(m=>m.Id == id);
+                var meter = await _emeterRepository.Get(m => m.Id == id);
                 if (meter == null) throw new TaskCanceledException("Meter not exists");
 
                 bool request = await _emeterRepository.Delete(meter);

@@ -5,7 +5,7 @@ using NTMS.BLL.Services;
 using NTMS.BLL.Services.Abstract;
 using NTMS.DAL.Repository;
 using NTMS.DAL.Repository.Abstract;
-using NTMS.Model;
+using NTMS.DAL.DBContext;
 using NTMS.Utility;
 
 namespace NTMS.IOC
@@ -20,12 +20,15 @@ namespace NTMS.IOC
             });
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-            services.AddAutoMapper(typeof(AytoMapperProfile));
+            services.AddAutoMapper(typeof(AutoMapperProfile));
             services.AddScoped<ITenantService, TenantService>();
             services.AddScoped<IFlatService, FlatService>();
             services.AddScoped<IEmeterService, EmeterService>();
             services.AddScoped<IEreadingService, EreadingService>();
             services.AddScoped<IReportService, ReportService>();
+            services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IWmeterService, WmeterService>();
+            services.AddScoped<IWreadingService, WreadingService>();
 
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace NTMS.DTO
 {
-    public class EreadingDTO
+    public class WreadingDTO
     {
         public int Id { get; set; }
 
@@ -12,7 +12,7 @@
 
         public int CurrentReading { get; set; }
 
-        public int? EmeterId { get; set; }
-        public string? EmeterNumber { get; set; }
+        public int? WmeterId { get; set; }
+        public string? WmeterNumber { get; set; }
     }
 }
