@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NTMS.BLL.Services;
 using NTMS.BLL.Services.Abstract;
+using NTMS.DAL.DBContext;
 using NTMS.DAL.Repository;
 using NTMS.DAL.Repository.Abstract;
 using NTMS.DAL.DBContext;

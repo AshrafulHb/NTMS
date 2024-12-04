@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NTMS.DAL.DBContext;
 using NTMS.DAL.Repository.Abstract;
+using NTMS.Model;
 using System.Linq.Expressions;
 
 namespace NTMS.DAL.Repository
@@ -12,23 +12,23 @@ namespace NTMS.DAL.Repository
 
         public GenericRepository(NtmsContext context)
         {
-            Context = context;
+            _context = context;
         }
-        public virtual async Task<T> Get(Expression<Func<T, bool>> filter)
+        public async Task<T> Get(Expression<Func<T, bool>> filter)
         {
             try
             {
-                T model = await Context.Set<T>().FirstOrDefaultAsync(filter);
+                T model= await _context.Set<T>().FirstOrDefaultAsync(filter);
                 return model;
             }
             catch { throw; }
         }
-        public virtual async Task<T> Create(T model)
+        public async Task<T> Create(T model)
         {
             try
             {
-                Context.Set<T>().Add(model);
-                await Context.SaveChangesAsync();
+                _context.Set<T>().Add(model);
+                await _context.SaveChangesAsync();  
                 return model;
             }
             catch { throw; }
@@ -36,7 +36,7 @@ namespace NTMS.DAL.Repository
 
 
 
-        public virtual async Task<bool> Edit(T model)
+        public async Task<bool> Edit(T model)
         {
             try
             {
@@ -48,21 +48,21 @@ namespace NTMS.DAL.Repository
         }
 
 
-        public virtual async Task<bool> Delete(T model)
+        public async Task<bool> Delete(T model)
         {
             try
             {
-                Context.Set<T>().Remove(model);
-                await Context.SaveChangesAsync();
+                _context.Set<T>().Remove(model);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch { throw; }
         }
-        public virtual async Task<IQueryable<T>> GetAll(Expression<Func<T, bool>> filter = null)
+        public async Task<IQueryable<T>> GetAll(Expression<Func<T, bool>> filter = null)
         {
             try
             {
-                IQueryable<T> query = filter == null ? Context.Set<T>() : Context.Set<T>().Where(filter);
+                IQueryable<T> query= filter==null?  _context.Set<T>():_context.Set<T>().Where(filter);
                 return query;
             }
             catch { throw; }

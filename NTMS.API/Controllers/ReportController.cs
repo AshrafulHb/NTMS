@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using NTMS.API.Utility;
 using NTMS.BLL.Services.Abstract;
 using NTMS.DTO;
@@ -15,7 +16,7 @@ namespace NTMS.API.Controllers
         {
             _reportService = reportService;
         }
-        [HttpGet, Route("Report")]
+        [HttpGet,Route("Report")]
         public async Task<IActionResult> Report(int tenantId, string firstDate, string lastDate)
         {
             var rsp = new Response<ReportDTO>();
