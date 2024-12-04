@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NTMS.DAL.DBContext;
 using NTMS.DAL.Repository.Abstract;
 using NTMS.Model;
 using System.Linq.Expressions;
@@ -12,13 +13,13 @@ namespace NTMS.DAL.Repository
 
         public GenericRepository(NtmsContext context)
         {
-            _context = context;
+            Context = context;
         }
         public async Task<T> Get(Expression<Func<T, bool>> filter)
         {
             try
             {
-                T model= await _context.Set<T>().FirstOrDefaultAsync(filter);
+                T model= await Context.Set<T>().FirstOrDefaultAsync(filter);
                 return model;
             }
             catch { throw; }
@@ -27,8 +28,8 @@ namespace NTMS.DAL.Repository
         {
             try
             {
-                _context.Set<T>().Add(model);
-                await _context.SaveChangesAsync();  
+                Context.Set<T>().Add(model);
+                await Context.SaveChangesAsync();  
                 return model;
             }
             catch { throw; }
@@ -52,8 +53,8 @@ namespace NTMS.DAL.Repository
         {
             try
             {
-                _context.Set<T>().Remove(model);
-                await _context.SaveChangesAsync();
+                Context.Set<T>().Remove(model);
+                await Context.SaveChangesAsync();
                 return true;
             }
             catch { throw; }
@@ -62,7 +63,7 @@ namespace NTMS.DAL.Repository
         {
             try
             {
-                IQueryable<T> query= filter==null?  _context.Set<T>():_context.Set<T>().Where(filter);
+                IQueryable<T> query= filter==null?  Context.Set<T>():Context.Set<T>().Where(filter);
                 return query;
             }
             catch { throw; }

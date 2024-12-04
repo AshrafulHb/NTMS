@@ -12,8 +12,7 @@ namespace NTMS.DAL.Repository
         {
         }
 
-        public ReportRepository(NtmsContext context)
-            : base(context) { }
+       
 
         public async Task<Report> GetByTenantIdAndDateRangeAsync(int tenantId, DateTime startDate, DateTime endDate)
         {
