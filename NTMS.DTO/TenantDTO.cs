@@ -17,6 +17,7 @@ namespace NTMS.DTO
         public string? Paddress { get; set; }
 
         public string? Telephone { get; set; }
+        public string? SecurityDeposit { get; set; }
 
         public string? StartDate { get; set; }
 

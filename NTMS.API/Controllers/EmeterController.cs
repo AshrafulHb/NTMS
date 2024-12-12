@@ -31,6 +31,23 @@ namespace NTMS.API.Controllers
             }
             return Ok(rsp);
         }
+        [HttpGet, Route("ListActive")]
+        public async Task<IActionResult> ListActive()
+        {
+            var rsp = new Response<List<EmeterDTO>>();
+
+            try
+            {
+                rsp.status = true;
+                rsp.value = await _emeterService.ListActive();
+            }
+            catch (Exception ex)
+            {
+                rsp.status = false;
+                rsp.msg = ex.Message;
+            }
+            return Ok(rsp);
+        }
 
         [HttpGet, Route("Get/{id:int}")]
         public async Task<IActionResult> Get(int id)

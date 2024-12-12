@@ -29,6 +29,18 @@ namespace NTMS.BLL.Services
             }
             catch { throw; }
         }
+        public async Task<List<EmeterDTO>> ListActive()
+        {
+            try
+            {
+                var query = await _emeterRepository.GetAll(m=>m.IsActive==true);
+                var meterList = query.Include(m => m.Ereadings).Include(m => m.Flat).ToList();
+                //      var meterList = query.Include(m => m.Flat).Where(m=>m.IsActive==true);
+                var list = _mapper.Map<List<EmeterDTO>>(meterList);
+                return list;
+            }
+            catch { throw; }
+        }
         public async Task<EmeterDTO> Get(int id)
         {
 

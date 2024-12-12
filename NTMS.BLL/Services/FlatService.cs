@@ -22,8 +22,8 @@ namespace NTMS.BLL.Services
             try
             {
                 var flatQuery = await _flatRepository.GetAll();
-                var flatList = flatQuery.Include(f => f.Tenants).Include(f => f.Emeters).ToList();
-                return _mapper.Map<List<FlatDTO>>(flatList.ToList());
+            //    var flatList = flatQuery.Include(f => f.Tenants).Include(f => f.Emeters).ToList();
+                return _mapper.Map<List<FlatDTO>>(flatQuery);
             }
             catch { throw; }
         }
@@ -35,9 +35,9 @@ namespace NTMS.BLL.Services
                 if (flat.Id == 0) throw new TaskCanceledException("Failed to add new flat");
 
                 var query = await _flatRepository.GetAll(f => f.Id == flat.Id);
-                flat = query.Include(f => f.Tenants).Include(f => f.Emeters).First();
+             //   flat = query.Include(f => f.Tenants).Include(f => f.Emeters).First();
 
-                return _mapper.Map<FlatDTO>(flat);
+                return _mapper.Map<FlatDTO>(query);
             }
             catch { throw; }
         }
@@ -53,6 +53,8 @@ namespace NTMS.BLL.Services
 
                 flat.Code = flatModel.Code;
                 flat.Rent = flatModel.Rent;
+                flat.GasBill = flatModel.GasBill;
+                flat.CleanerBill = flatModel.CleanerBill;
 
                 bool request = await _flatRepository.Edit(flat);
                 if (!request) throw new TaskCanceledException("Failed to edit flat");

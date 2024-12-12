@@ -34,8 +34,8 @@ namespace NTMS.BLL.Services
             try
             {
                 var _reading = _mapper.Map<Ereading>(model);
-                if (_reading.StartDate == _reading.EndDate || _reading.StartDate > _reading.EndDate) throw new TaskCanceledException("End date must be later than start date!");
-                else if (_reading.PreviousReading > _reading.CurrentReading) throw new TaskCanceledException("Current reading cand be less than previous reading!");
+                if (_reading.StartDate >= _reading.EndDate) throw new TaskCanceledException("End date must be later than start date!");
+                else if (_reading.PreviousReading > _reading.CurrentReading) throw new TaskCanceledException("Current reading can not be less than previous reading!");
 
                 var reading = await _ereadingRepository.Create(_reading);
                 if (reading.Id == 0) throw new TaskCanceledException("Failed to add new reading");

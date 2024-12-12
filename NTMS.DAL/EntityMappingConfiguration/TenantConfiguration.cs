@@ -14,6 +14,8 @@ namespace NTMS.DAL.EntityMappingConfiguration
 
             builder.Property(e => e.FlatId).HasColumnName("Flat_Id");
             builder.Property(e => e.Paddress).HasColumnName("PAddress");
+            builder.Property(e => e.SecurityDeposit).HasColumnName("SecurityDeposit");
+
             builder.Property(e => e.StartDate).HasColumnType("datetime");
 
             builder.HasOne(d => d.Flat).WithMany(p => p.Tenants)

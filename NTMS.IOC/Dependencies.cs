@@ -6,7 +6,6 @@ using NTMS.BLL.Services.Abstract;
 using NTMS.DAL.DBContext;
 using NTMS.DAL.Repository;
 using NTMS.DAL.Repository.Abstract;
-using NTMS.DAL.DBContext;
 using NTMS.Utility;
 
 namespace NTMS.IOC
@@ -30,6 +29,8 @@ namespace NTMS.IOC
             services.AddScoped<IReportRepository, ReportRepository>();
             services.AddScoped<IWmeterService, WmeterService>();
             services.AddScoped<IWreadingService, WreadingService>();
+            services.AddScoped<IEruleService, EruleService>();
+            services.AddScoped<IWruleService, WruleService>();
 
         }
     }

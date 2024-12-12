@@ -13,13 +13,14 @@ namespace NTMS.DAL.EntityMappingConfiguration
 
             builder.ToTable("EBillingRules");
 
+            builder.Property(e => e.CommercialDc).HasColumnType("decimal(18, 2)");
+            builder.Property(e => e.CommercialRate).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.DemandCharge).HasColumnType("decimal(18, 2)");
-            builder.Property(e => e.MinimumCharge).HasColumnType("decimal(18, 2)");
+            builder.Property(e => e.MeterRent).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Rate1).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Rate2).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Rate3).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Rate4).HasColumnType("decimal(18, 2)");
-            builder.Property(e => e.ServiceCharge).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Vat).HasColumnType("decimal(18, 2)");
         }
 

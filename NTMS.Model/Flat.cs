@@ -10,6 +10,10 @@ public partial class Flat
     public string? Code { get; set; }
 
     public decimal? Rent { get; set; }
+    public decimal? GasBill { get; set; }
+
+    public decimal? CleanerBill { get; set; }
+
 
     public virtual ICollection<Emeter> Emeters { get; set; } = new List<Emeter>();
 
@@ -17,5 +21,4 @@ public partial class Flat
 
     public virtual ICollection<Wmeter> Wmeters { get; set; } = new List<Wmeter>();
 
-    public virtual ICollection<UtilityOption> UtilityOptions { get; set; } = new List<UtilityOption>();
 }

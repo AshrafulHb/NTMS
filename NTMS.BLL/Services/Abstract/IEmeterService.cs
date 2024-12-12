@@ -5,6 +5,7 @@ namespace NTMS.BLL.Services.Abstract
     public interface IEmeterService
     {
         Task<List<EmeterDTO>> List();
+        Task<List<EmeterDTO>> ListActive();
         Task<EmeterDTO> Get(int id);
         Task<EmeterDTO> Create(EmeterDTO model);
         Task<bool> Edit(EmeterDTO model);

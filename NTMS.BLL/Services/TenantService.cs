@@ -55,6 +55,7 @@ namespace NTMS.BLL.Services
                 tenant.Paddress=tenantModel.Paddress;
                 tenant.Occupation=tenantModel.Occupation;
                 tenant.Telephone=tenantModel.Telephone;
+                tenant.SecurityDeposit = tenantModel.SecurityDeposit;
                 tenant.FlatId=tenantModel.FlatId;
                 tenant.IsActive=tenantModel.IsActive;
 

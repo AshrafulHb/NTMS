@@ -10,6 +10,8 @@ namespace NTMS.DAL.EntityMappingConfiguration
         {
             builder.HasKey(e => e.Id).HasName("PK_dbo.Flats");
 
+            builder.Property(e => e.CleanerBill).HasColumnType("decimal(18, 2)");
+            builder.Property(e => e.GasBill).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.Rent).HasColumnType("decimal(18, 2)");
         }
     }

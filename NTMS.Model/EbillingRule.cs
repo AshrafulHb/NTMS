@@ -33,9 +33,11 @@ public partial class EbillingRule
 
     public decimal DemandCharge { get; set; }
 
-    public decimal MinimumCharge { get; set; }
+    public decimal CommercialRate { get; set; }
 
-    public decimal ServiceCharge { get; set; }
+    public decimal? CommercialDc { get; set; }
+
+    public decimal MeterRent { get; set; }
 
     public decimal Vat { get; set; }
 }

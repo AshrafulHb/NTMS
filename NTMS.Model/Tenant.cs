@@ -14,6 +14,7 @@ public partial class Tenant
     public string? Paddress { get; set; }
 
     public string? Telephone { get; set; }
+    public string? SecurityDeposit { get; set; }
 
     public DateTime StartDate { get; set; }
 

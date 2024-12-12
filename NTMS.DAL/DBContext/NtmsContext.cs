@@ -25,9 +25,7 @@ public class NtmsContext : DbContext
 
     public virtual DbSet<Tenant> Tenants { get; set; }
 
-    public virtual DbSet<TmpMonthlyBill> TmpMonthlyBills { get; set; }
 
-    public virtual DbSet<UtilityOption> UtilityOptions { get; set; }
 
     public virtual DbSet<WbillingRule> WbillingRules { get; set; }
 
