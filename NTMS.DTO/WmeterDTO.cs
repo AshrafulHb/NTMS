@@ -1,6 +1,4 @@
-﻿using NTMS.Model;
-
-namespace NTMS.DTO
+﻿namespace NTMS.DTO
 {
     public class WmeterDTO
     {
@@ -13,7 +11,5 @@ namespace NTMS.DTO
         public string? FlatCode { get; set; }
 
         public int? FlatId { get; set; }
-
-        //      public virtual ICollection<Wreading> Wreadings { get; set; } = new List<Wreading>();
     }
 }

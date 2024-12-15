@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace NTMS.Utility
 {
-    public class AutoMapperProfile:Profile
+    public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
@@ -24,7 +24,7 @@ namespace NTMS.Utility
             #region Tenant
             CreateMap<Tenant, TenantDTO>().ForMember(dest => dest.StartDate, opt => opt.MapFrom(origin => origin.StartDate.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.IsActive, opt => opt.MapFrom(origin => origin.IsActive == true ? 1 : 0))
-                .ForMember(dest => dest.FlatDescription, opt=>opt.MapFrom(origin=>origin.Flat.Code));
+                .ForMember(dest => dest.FlatCode, opt => opt.MapFrom(origin => origin.Flat.Code));
 
             CreateMap<TenantDTO, Tenant>().ForMember(dest => dest.IsActive, opt => opt.MapFrom(origin => origin.IsActive == 1 ? true : false));
 
@@ -33,7 +33,7 @@ namespace NTMS.Utility
 
             #region Emeter
             CreateMap<Emeter, EmeterDTO>().ForMember(dest => dest.IsActive, opt => opt.MapFrom(origin => origin.IsActive == true ? 1 : 0))
-                .ForMember(dest => dest.FlatDescription, opt => opt.MapFrom(origin => origin.Flat.Code));
+                .ForMember(dest => dest.FlatCode, opt => opt.MapFrom(origin => origin.Flat.Code));
 
             CreateMap<EmeterDTO, Emeter>().ForMember(dest => dest.IsActive, opt => opt.MapFrom(origin => origin.IsActive == 1 ? true : false))
                 .ForMember(dest => dest.Flat, opt => opt.Ignore());
@@ -43,7 +43,7 @@ namespace NTMS.Utility
             #region Ereading
             CreateMap<Ereading, EreadingDTO>().ForMember(dest => dest.StartDate, opt => opt.MapFrom(origin => origin.StartDate.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.EndDate, opt => opt.MapFrom(origin => origin.EndDate.ToString("dd/MM/yyyy")))
-                .ForMember(dest=>dest.EmeterNumber,opt=>opt.MapFrom(origin=>Convert.ToString(origin.Emeter.MeterNumber, new CultureInfo("en-US"))));
+                .ForMember(dest => dest.EmeterNumber, opt => opt.MapFrom(origin => Convert.ToString(origin.Emeter.MeterNumber, new CultureInfo("en-US"))));
 
             CreateMap<EreadingDTO, Ereading>().ForMember(dest => dest.Emeter, opt => opt.Ignore())
           .ForMember(dest => dest.StartDate, opt => opt.MapFrom(origin => Convert.ToDateTime(origin.StartDate)))
